@@ -1,0 +1,17 @@
+services:
+    mindy.bundle.user.admin.user_admin:
+        class: Mindy\Bundle\UserBundle\Admin\UserAdmin
+        tags:
+            - { name: admin.admin, slug: user_admin }
+
+    user.user_provider:
+        class: Mindy\Bundle\UserBundle\Provider\UserProvider
+
+    user.event.listener:
+        class: Mindy\Bundle\UserBundle\EventListener\UserListener
+        arguments:
+            - '@mindy.bundle.mail.helper.mail'
+            - '@router'
+        tags:
+            - { name: kernel.event_listener, event: user.lost_password, method: onUserLostPassword }
+            - { name: kernel.event_listener, event: user.registered, method: onUserRegistered }

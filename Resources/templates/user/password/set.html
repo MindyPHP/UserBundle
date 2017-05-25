@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [['name' => 'Создание пароля']] %}
+    {% parent %}
+{% endblock %}
+
+{% block content %}
+    <div class="b-wrapper">
+        <div class="b-row">
+            <div class="b-col b-col_small_12">
+                <h1 class="b-title">Создание пароля</h1>
+
+                {{ form_start(form)|safe }}
+                <div class="b-form__row">
+                    {{ form_row(form.children.password.children.first, ['attr' => ['class' => 'b-input__input'], 'label_attr' => ['class' => 'b-input__label']])|safe }}
+                </div>
+                <div class="b-form__row">
+                    {{ form_row(form.children.password.children.second, ['attr' => ['class' => 'b-input__input'], 'label_attr' => ['class' => 'b-input__label']])|safe }}
+                </div>
+                {{ form_end(form)|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

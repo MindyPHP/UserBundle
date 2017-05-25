@@ -1,0 +1,52 @@
+user_registration_confirm:
+    path: /registration/confirm/{token}
+    defaults:
+        _controller: UserBundle:Registration:confirm
+    requirements:
+        token: \d+
+
+user_registration_success:
+    path: /registration/success
+    defaults:
+        _controller: UserBundle:Registration:success
+
+user_set_password:
+    path: /set_password/{token}
+    requirements:
+        token: \d+
+    defaults:
+        _controller: UserBundle:Password:set
+
+user_change_password:
+    path: /change_password
+    requirements:
+        token: \d+
+    defaults:
+        _controller: UserBundle:Password:change
+
+user_registration:
+    path: /registration
+    defaults:
+        _controller: UserBundle:Registration:registration
+
+user_login:
+    path: /login
+    defaults:
+        _controller: UserBundle:Auth:login
+
+user_logout:
+    path: /logout
+    defaults:
+        _controller: UserBundle:Auth:logout
+
+user_lost_password:
+    path: /lost_password
+    defaults:
+        _controller: UserBundle:LostPassword:lost
+
+user_lost_password_confirm:
+    path: /lost_password/{token}
+    defaults:
+        _controller: UserBundle:LostPassword:confirm
+    requirements:
+        token: \d+

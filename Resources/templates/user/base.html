@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="b-wrapper">
+        <div class="b-row">
+            <div class="b-col b-col_small_3">
+                <ul class="b-user-sidebar">
+                    <li class="b-user-sidebar__item">
+                        <a href="{{ url('user_change_password') }}" class="b-user-sidebar__link">
+                            Изменить пароль
+                        </a>
+                    </li>
+                    <li class="b-user-sidebar__item">
+                        <a href="{{ url('user_logout') }}" class="b-user-sidebar__link">
+                            Выход
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-col b-col_small_9">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
