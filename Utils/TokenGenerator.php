@@ -20,6 +20,7 @@ class TokenGenerator
      */
     public function generate(): string
     {
-        return (string) random_int(10000, 99999);
+        $uniqueId = uniqid((string)rand(), true);
+        return (string) md5($uniqueId);
     }
 }

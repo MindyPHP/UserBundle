@@ -25,11 +25,13 @@ class SetPasswordFormType extends AbstractType
         $builder
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'first_name' => 'password',
+                'second_name' => 'password_repeat',
                 'invalid_message' => 'Пароли не совпадают',
-                'required' => true,
                 'first_options' => ['label' => 'Пароль'],
                 'second_options' => ['label' => 'Повтор пароля'],
                 'constraints' => [
+                    new Assert\NotBlank(),
                     new Assert\Length([
                         'min' => 6,
                         'max' => 20,

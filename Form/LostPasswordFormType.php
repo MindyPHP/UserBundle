@@ -31,9 +31,12 @@ class LostPasswordFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Электронная почта',
                 'constraints' => [
+                    new Assert\Email(),
+                    new Assert\NotBlank(),
                     new Assert\Callback(function ($value, ExecutionContextInterface $context, $payload) {
                         if (0 == User::objects()->filter(['email' => $value])->count()) {
-                            $context->buildViolation('Пользователь с таким адресом электронной почты не существует')
+                            $context
+                                ->buildViolation('Пользователь с таким адресом электронной почты не существует')
                                 ->addViolation();
                         }
                     }),

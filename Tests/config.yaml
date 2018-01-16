@@ -1,0 +1,5 @@
+orm:
+    connections:
+        default:
+            memory: true
+            driver: pdo_sqlite
