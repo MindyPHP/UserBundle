@@ -17,8 +17,11 @@ class UserUpdateForm extends UserCreateForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder->remove('password');
+    }
+
+    public function getParent()
+    {
+        return UserCreateForm::class;
     }
 }

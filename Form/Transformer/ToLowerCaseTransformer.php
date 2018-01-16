@@ -20,7 +20,7 @@ class ToLowerCaseTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        return mb_strtolower((string)$value, 'UTF-8');
+        return mb_strtolower((string) $value, 'UTF-8');
     }
 
     /**
@@ -28,6 +28,6 @@ class ToLowerCaseTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        return mb_strtolower((string)$value, 'UTF-8');
+        return mb_strtolower((string) $value, 'UTF-8');
     }
 }

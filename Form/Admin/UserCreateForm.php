@@ -12,12 +12,11 @@ declare(strict_types=1);
 namespace Mindy\Bundle\UserBundle\Form\Admin;
 
 use Mindy\Bundle\UserBundle\Form\Transformer\ToLowerCaseTransformer;
+use Mindy\Bundle\UserBundle\Form\Type\RepeatedPasswordType;
 use Mindy\Bundle\UserBundle\Model\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,7 +38,7 @@ class UserCreateForm extends AbstractType
                     new Assert\Callback(function ($value, ExecutionContextInterface $context) use ($instance) {
                         $qs = User::objects()->filter(['email' => $value]);
 
-                        if (false == $instance->getIsNewRecord()) {
+                        if ($instance && false == $instance->getIsNewRecord()) {
                             $qs->exclude(['id' => $instance->id]);
                         }
 
@@ -59,23 +58,10 @@ class UserCreateForm extends AbstractType
                 'label' => 'Администратор',
                 'required' => false,
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Пароли не совпадают',
-                'required' => true,
-                'first_options' => ['label' => 'Пароль'],
-                'second_options' => ['label' => 'Повтор пароля'],
-                'constraints' => [
-                    new Assert\Length([
-                        'min' => 6,
-                        'max' => 20,
-                    ]),
-                ],
-            ])
+            ->add('password', RepeatedPasswordType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'Сохранить',
             ]);
-
 
         $builder
             ->get('email')
