@@ -22,6 +22,8 @@ use Mindy\Bundle\UserBundle\Form\ChangePasswordFormType;
 use Mindy\Bundle\UserBundle\Form\LostPasswordFormType;
 use Mindy\Bundle\UserBundle\Form\RegistrationFormType;
 use Mindy\Bundle\UserBundle\Form\SetPasswordFormType;
+use Mindy\Bundle\UserBundle\Model\User;
+use Mindy\Bundle\UserBundle\Model\UserManager;
 use Mindy\Orm\Orm;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -177,7 +179,14 @@ class FormTest extends TypeTestCase
             'email' => 'foobar',
         ];
 
-        $form = $this->factory->create(UserCreateForm::class);
+        $instance = $this
+            ->getMockBuilder(User::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $instance->id = 1;
+        $instance->method('getIsNewRecord')->willReturn(false);
+
+        $form = $this->factory->create(UserCreateForm::class, $instance);
 
         $form->submit($formData);
 
