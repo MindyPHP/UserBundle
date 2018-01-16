@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+    ['name' => 'Восстановление пароля'],
+    ] %}
+    {% parent %}
+{% endblock %}
+
+{% block content %}
+    <div class="b-wrapper">
+        <div class="b-row">
+            <div class="b-col b-col_small_12">
+                <h1 class="b-heading">Восстановление пароля</h1>
+
+                <div class="b-typeset">
+                    На вашу электронную почту отправлено письмо с инструкциями для изменения пароля.
+                    Пожалуйста проверьте вашу почту.
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

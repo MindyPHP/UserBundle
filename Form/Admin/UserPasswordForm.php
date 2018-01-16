@@ -9,35 +9,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Mindy\Bundle\UserBundle\Form;
+namespace Mindy\Bundle\UserBundle\Form\Admin;
 
-use Mindy\Bundle\UserBundle\Form\Transformer\ToLowerCaseTransformer;
 use Mindy\Bundle\UserBundle\Model\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class RegistrationFormType extends AbstractType
+class UserPasswordForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Электронная почта',
-                'constraints' => [
-                    new Assert\Callback(function ($value, ExecutionContextInterface $context, $payload) {
-                        if (User::objects()->filter(['email' => $value])->count() > 0) {
-                            $context->buildViolation('Пользователь с таким адресом электронной почты уже существует')
-                                ->addViolation();
-                        }
-                    }),
-                ],
-            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Пароли не совпадают',
@@ -52,11 +39,14 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Зарегистрироваться',
+                'label' => 'Сохранить',
             ]);
+    }
 
-        $builder
-            ->get('email')
-            ->addModelTransformer(new ToLowerCaseTransformer());
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
     }
 }

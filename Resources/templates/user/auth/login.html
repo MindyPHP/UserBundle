@@ -10,8 +10,8 @@
 {% block content %}
     <div class="b-wrapper">
         <div class="b-row">
-            <div class="b-col b-col_small_6">
-                <h1 class="b-title">Вход</h1>
+            <div class="b-col b-col_small_12 b-col_large_6">
+                <h1 class="b-heading">Вход</h1>
 
                 {% if error %}
                     <div class="b-login__error">
@@ -21,38 +21,39 @@
                 {% endif %}
 
                 <form action="{{ url('user_login') }}" method="post" class="b-login__form">
-                    <input type="hidden" name="_target_path" value="/"/>
-
                     <div class="b-form__row">
-                        <label for="username" class="b-input__label">Электронная почта:</label>
-                        <input type="email" class="b-input__input" id="username" name="_username"
-                               required="required" value="{{ last_username }}"/>
+                        <label for="username" class="b-label">Электронная почта:</label>
+                        <input type="text" class="b-input" id="username" name="_username"
+                               value="{{ last_username }}"/>
                     </div>
 
                     <div class="b-form__row">
-                        <label for="password" class="b-input__label">Пароль:</label>
-                        <input required="required" type="password" class="b-input__input" id="password" name="_password"/>
+                        <label for="password" class="b-label">Пароль:</label>
+                        <input type="password" class="b-input" id="password" name="_password"/>
                     </div>
 
                     <div class="b-form__row">
-                        <input type="checkbox" class="b-checkbox__checkbox" id="remember" name="_remember" checked/>
-                        <label for="remember" class="b-checkbox__label">Запомнить меня</label>
+                        <input type="checkbox" class="b-input b-input_choice" id="remember" name="_remember" checked/>
+                        <label for="remember" class="b-label">Запомнить меня</label>
                     </div>
 
-
-                    <div class="b-container">
-                        <div class="b-group">
+                    <div class="b-group">
+                        <div class="b-input-group">
                             <input type="submit" value="Вход" class="b-button b-button_red"/>
                         </div>
 
-                        <div class="b-group">
+                        <div class="b-input-group">
                             <a class="b-button" href="{{ url('user_registration') }}">Регистрация</a>
                             <a class="b-button" href="{{ url('user_lost_password') }}">Забыли пароль?</a>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="b-col b-col_small_6">&nbsp;</div>
+            <div class="b-col b-col_small_12 b-col_large_6">
+                <div class="b-hide b-hide_large_up">
+                    <div class="b-space"></div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+    ['name' => 'Пользователи', 'url' => url('admin_user_user_list')],
+    ['name' => 'Редактирование пользователя']
+    ] %}
+    {% parent %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="b-heading">Редактирование пользователя: {{ user }}</h1>
+    {{ form_render(form)|safe }}
+{% endblock %}

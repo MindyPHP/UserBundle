@@ -1,17 +1,21 @@
+parameters:
+    mindy.bundle.user.redirect_after_login: '/'
+
 services:
-    mindy.bundle.user.admin.user_admin:
-        class: Mindy\Bundle\UserBundle\Admin\UserAdmin
-        tags:
-            - { name: admin.admin, slug: user_admin }
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-    user.user_provider:
-        class: Mindy\Bundle\UserBundle\Provider\UserProvider
+    _instanceof:
+        Mindy\Template\Library\LibraryInterface:
+            public: true
+            tags: ['template.library']
 
-    user.event.listener:
-        class: Mindy\Bundle\UserBundle\EventListener\UserListener
-        arguments:
-            - '@mindy.bundle.mail.helper.mail'
-            - '@router'
-        tags:
-            - { name: kernel.event_listener, event: user.lost_password, method: onUserLostPassword }
-            - { name: kernel.event_listener, event: user.registered, method: onUserRegistered }
+    Mindy\Bundle\UserBundle\:
+        resource: '../../*'
+        exclude: '../../{Tests,Model,vendor}'
+
+    Mindy\Bundle\UserBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']

@@ -1,5 +1,8 @@
 .DS_Store
 .idea
-*.iml
 *.lock
+
+phpunit.xml
+
+/coverage
 /vendor

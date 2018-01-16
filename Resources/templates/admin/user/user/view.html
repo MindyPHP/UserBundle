@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+    ['name' => 'Пользователи', 'url' => url('admin_user_user_list')],
+    ['name' => user]
+    ] %}
+    {% parent %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="b-heading">{{ user }}</h1>
+
+    <div class="b-space"></div>
+
+    <div class="b-block-grid b-block-grid_small_6">
+        <div class="b-block-grid__item">
+            <div class="b-info__label">Электронная почта:</div>
+            <div class="b-info__text">{{ user.email }}</div>
+        </div>
+        <div class="b-block-grid__item">
+            <div class="b-info__label">Активен:</div>
+            <div class="b-info__text">
+                {{ user.is_active ? 'Да' : 'Нет' }}
+            </div>
+        </div>
+        <div class="b-block-grid__item">
+            <div class="b-info__label">Администратор:</div>
+            <div class="b-info__text">
+                {{ user.is_admin ? 'Да' : 'Нет' }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

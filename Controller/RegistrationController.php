@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of Mindy Framework.
- * (c) 2017 Maxim Falaleev
+ * Studio 107 (c) 2018 Maxim Falaleev
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,23 +20,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RegistrationController extends Controller
 {
-    public function registrationAction(Request $request)
+    public function registration(Request $request)
     {
         $form = $this->createForm(RegistrationFormType::class, [], [
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             if ($form->handleRequest($request)->isValid()) {
                 $data = $form->getData();
 
-                $token = random_int(10000, 99999);
-
                 $user = new User([
-                    'name' => $data['name'],
                     'email' => $data['email'],
-                    'token' => $token,
-                    'salt' => base_convert(sha1(uniqid(mt_rand(), true)), 16, 36),
+                    'is_active' => false,
                 ]);
 
                 $user->password = $this->get('security.password_encoder')
@@ -59,12 +56,12 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function successAction(Request $request)
+    public function success(Request $request)
     {
         return $this->render('user/registration/success.html');
     }
 
-    public function confirmAction(Request $request, $token)
+    public function confirm(Request $request, $token)
     {
         $user = User::objects()->get(['token' => $token]);
         if (null === $user) {
@@ -77,13 +74,9 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        $user->token = null;
         $user->is_active = true;
+        $user->save(['is_active']);
 
-        if (false === $user->save()) {
-            throw new \RuntimeException('Fail to save user');
-        }
-
-        return $this->redirect('/');
+        return $this->render('user/registration/confirm_success.html');
     }
 }
