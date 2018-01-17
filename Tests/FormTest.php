@@ -23,7 +23,6 @@ use Mindy\Bundle\UserBundle\Form\LostPasswordFormType;
 use Mindy\Bundle\UserBundle\Form\RegistrationFormType;
 use Mindy\Bundle\UserBundle\Form\SetPasswordFormType;
 use Mindy\Bundle\UserBundle\Model\User;
-use Mindy\Bundle\UserBundle\Model\UserManager;
 use Mindy\Orm\Orm;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -104,7 +103,7 @@ class FormTest extends TypeTestCase
     {
         $formData = [
             'password' => [
-                'first' => 'foobar'
+                'first' => 'foobar',
             ],
         ];
 
@@ -129,7 +128,7 @@ class FormTest extends TypeTestCase
     {
         $formData = [
             'password' => [
-                'first' => 'foobar'
+                'first' => 'foobar',
             ],
         ];
 

@@ -22,12 +22,21 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface
 {
     /**
+     * @param string $username
+     *
+     * @return User|null
+     */
+    public function fetchUser($username)
+    {
+        return User::objects()->get(['email' => $username]);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function loadUserByUsername($username)
     {
-        $user = User::objects()->get(['email' => $username]);
-
+        $user = $this->fetchUser($username);
         if (null === $user) {
             throw new UsernameNotFoundException();
         }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Mindy\Bundle\UserBundle\ArgumentResolver;
+namespace Mindy\Bundle\UserBundle\ArgumentValueResolver;
 
 use Mindy\Bundle\UserBundle\Model\User;
 use Symfony\Component\HttpFoundation\Request;

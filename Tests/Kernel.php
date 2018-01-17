@@ -44,6 +44,7 @@ class Kernel extends BaseKernel
 
     /**
      * Loads the container configuration.
+     *
      * @throws \Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
