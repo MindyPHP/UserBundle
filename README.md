@@ -1,7 +1,7 @@
 # User Bundle
 
 [![Build Status](https://travis-ci.org/MindyPHP/UserBundle.svg?branch=master)](https://travis-ci.org/MindyPHP/UserBundle)
-[![Coverage Status](https://img.shields.io/coveralls/MindyPHP/UserBundle.svg)](https://coveralls.io/r/MindyPHP/UserBundle)
+[![codecov](https://codecov.io/gh/MindyPHP/FileBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/MindyPHP/FileBundle)
 [![Latest Stable Version](https://poser.pugx.org/mindy/user-bundle/v/stable.svg)](https://packagist.org/packages/mindy/user-bundle)
 [![Total Downloads](https://poser.pugx.org/mindy/user-bundle/downloads.svg)](https://packagist.org/packages/mindy/user-bundle)
 
