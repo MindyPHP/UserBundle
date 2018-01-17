@@ -26,7 +26,7 @@ class LostPasswordController extends Controller
     {
         $form = $this->createForm(LostPasswordFormType::class, [], [
             'method' => 'POST',
-            'action' => $this->generateUrl('user_lost_password')
+            'action' => $this->generateUrl('user_lost_password'),
         ]);
         $form->handleRequest($request);
 
