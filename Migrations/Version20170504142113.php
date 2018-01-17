@@ -28,13 +28,14 @@ class Version20170504142113 extends AbstractMigration
         $userTable = $schema->createTable(User::tableName());
         $userTable->addColumn('id', 'integer', ['autoincrement' => true, 'unsigned' => true, 'length' => 11]);
         $userTable->addColumn('name', 'string', ['length' => 255]);
-        $userTable->addColumn('avatar', 'string', ['length' => 255, 'notnull' => false]);
+        $userTable->addColumn('phone', 'string', ['length' => 255, 'notnull' => false]);
         $userTable->addColumn('email', 'string', ['length' => 255]);
         $userTable->addColumn('password', 'string', ['length' => 255]);
         $userTable->addColumn('salt', 'string', ['length' => 255]);
         $userTable->addColumn('token', 'string', ['length' => 255, 'notnull' => false]);
         $userTable->addColumn('is_active', 'smallint', ['length' => 1, 'default' => 0]);
-        $userTable->addColumn('is_manager', 'smallint', ['length' => 1, 'default' => 0]);
+        $userTable->addColumn('is_superuser', 'smallint', ['length' => 1, 'default' => 0]);
+        $userTable->addColumn('phone', 'string', ['length' => 255, 'notnull' => false]);
         $userTable->setPrimaryKey(['id']);
     }
 

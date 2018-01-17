@@ -13,13 +13,11 @@ namespace Mindy\Bundle\UserBundle\Model;
 
 use Mindy\Orm\Fields\BooleanField;
 use Mindy\Orm\Fields\CharField;
-use Mindy\Orm\Fields\ImageField;
 
 /**
  * Class User.
  *
  * @property string $name
- * @property string $avatar
  * @property string $phone
  * @property bool $is_superuser
  *
@@ -33,12 +31,9 @@ class User extends AbstractUser
             'name' => [
                 'class' => CharField::class,
             ],
-            'avatar' => [
-                'class' => ImageField::class,
-                'null' => true,
-            ],
             'phone' => [
                 'class' => CharField::class,
+                'null' => true,
             ],
             'is_superuser' => [
                 'class' => BooleanField::class,
