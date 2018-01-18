@@ -15,6 +15,7 @@ use Mindy\Bundle\MindyBundle\Controller\Controller;
 use Mindy\Bundle\UserBundle\EventListener\UserRegisteredEvent;
 use Mindy\Bundle\UserBundle\Form\RegistrationFormType;
 use Mindy\Bundle\UserBundle\Model\User;
+use Mindy\Bundle\UserBundle\Utils\TokenGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -25,30 +26,33 @@ class RegistrationController extends Controller
         $form = $this->createForm(RegistrationFormType::class, [], [
             'method' => 'POST',
         ]);
+        $form->handleRequest($request);
 
-        if ('POST' === $request->getMethod()) {
-            if ($form->handleRequest($request)->isValid()) {
-                $data = $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
 
-                $user = new User([
-                    'email' => $data['email'],
-                    'is_active' => false,
-                ]);
+            $tokenGenerator = $this->get(TokenGenerator::class);
 
-                $user->password = $this->get('security.password_encoder')
-                    ->encodePassword($user, $data['password']);
+            $user = new User([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'token' => $tokenGenerator->generate(),
+                'is_active' => false,
+            ]);
 
-                if (false == $user->save()) {
-                    throw new \RuntimeException('Failed to save user');
-                }
+            $user->password = $this->get('security.password_encoder')
+                ->encodePassword($user, $data['password']);
 
-                $this->get('event_dispatcher')->dispatch(
-                    UserRegisteredEvent::EVENT_NAME,
-                    new UserRegisteredEvent($user)
-                );
-
-                return $this->redirectToRoute('user_registration_success');
+            if (false == $user->save()) {
+                throw new \RuntimeException('Failed to save user');
             }
+
+            $this->get('event_dispatcher')->dispatch(
+                UserRegisteredEvent::EVENT_NAME,
+                new UserRegisteredEvent($user)
+            );
+
+            return $this->redirectToRoute('user_registration_success');
         }
 
         return $this->render('user/registration/registration.html', [

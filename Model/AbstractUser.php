@@ -56,6 +56,16 @@ abstract class AbstractUser extends Model implements AdvancedUserInterface
     /**
      * {@inheritdoc}
      */
+    public function beforeSave($owner, $isNew)
+    {
+        if ($this->isNewRecord) {
+            $this->salt = base64_encode(random_bytes(10));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRoles()
     {
         return [];
