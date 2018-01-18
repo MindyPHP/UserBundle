@@ -16,3 +16,6 @@ services:
     Mindy\Bundle\UserBundle\Controller\:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
+
+    Mindy\Bundle\UserBundle\Utils\TokenGenerator:
+        public: true
