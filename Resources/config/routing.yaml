@@ -1,57 +1,57 @@
 user_registration_success:
     path: /registration/success
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\RegistrationController::success
+        _controller: \Mindy\Bundle\UserBundle\Controller\RegistrationController::success
 
 user_registration_confirm:
     path: /registration/confirm/{token}
     requirements:
         token: \d+
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Registration::confirm
+        _controller: \Mindy\Bundle\UserBundle\Controller\RegistrationController::confirm
 
 user_set_password:
     path: /set_password/{token}
     requirements:
         token: \d+
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Password::set
+        _controller: \Mindy\Bundle\UserBundle\Controller\PasswordController::set
 
 user_change_password:
     path: /change_password
     requirements:
         token: \d+
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Password::change
+        _controller: \Mindy\Bundle\UserBundle\Controller\PasswordController::change
 
 user_registration:
     path: /registration
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Registration::registration
+        _controller: \Mindy\Bundle\UserBundle\Controller\RegistrationController::registration
 
 user_login:
     path: /login
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Auth::login
+        _controller: \Mindy\Bundle\UserBundle\Controller\AuthController::login
 
 user_logout:
     path: /logout
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\Auth::logout
+        _controller: \Mindy\Bundle\UserBundle\Controller\AuthController::logout
 
 user_lost_password:
     path: /lost_password
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\LostPassword::lost
+        _controller: \Mindy\Bundle\UserBundle\Controller\LostPasswordController::lost
 
 user_lost_password_success:
     path: /lost_password/success
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\LostPassword::success
+        _controller: \Mindy\Bundle\UserBundle\Controller\LostPasswordController::success
 
 user_lost_password_confirm:
     path: /lost_password/{token}
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\UserBundle\LostPassword::confirm
+        _controller: \Mindy\Bundle\UserBundle\Controller\LostPasswordController::confirm
     requirements:
         token: \d+

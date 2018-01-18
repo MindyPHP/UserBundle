@@ -1,37 +1,37 @@
 admin_user_user_list:
     path: /user/list
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::list
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::list
 
 admin_user_user_create:
     path: /user/create
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::create
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::create
 
 admin_user_user_view:
     path: /user/view/{id}
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::view
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::view
     requirements:
         id: \d+
 
 admin_user_user_update:
     path: /user/update/{id}
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::update
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::update
     requirements:
         id: \d+
 
 admin_user_user_remove:
     path: /user/remove/{id}
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::remove
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::remove
     requirements:
         id: \d+
 
 admin_user_user_password:
     path: /user/password/{id}
     defaults:
-        _controller: \Mindy\Bundle\UserBundle\Admin\UserController::password
+        _controller: \Mindy\Bundle\UserBundle\Controller\Admin\UserController::password
     requirements:
         id: \d+
