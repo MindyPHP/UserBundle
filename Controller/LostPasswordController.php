@@ -16,14 +16,16 @@ use Mindy\Bundle\UserBundle\EventListener\UserLostPasswordEvent;
 use Mindy\Bundle\UserBundle\Form\LostPasswordFormType;
 use Mindy\Bundle\UserBundle\Model\User;
 use Mindy\Bundle\UserBundle\Utils\TokenGenerator;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LostPasswordController extends Controller
 {
-    public function lost(Request $request, TokenGenerator $tokenGenerator, EventDispatcher $eventDispatcher)
+    public function lost(Request $request)
     {
+        $eventDispatcher = $this->get('event_dispatcher');
+        $tokenGenerator = $this->get(TokenGenerator::class);
+
         $form = $this->createForm(LostPasswordFormType::class, [], [
             'method' => 'POST',
             'action' => $this->generateUrl('user_lost_password'),
@@ -59,7 +61,7 @@ class LostPasswordController extends Controller
         return $this->render('user/lost/success.html');
     }
 
-    public function confirm(Request $request, $token)
+    public function confirm(Request $request, string $token)
     {
         $user = User::objects()->get(['token' => $token]);
         if (null === $user) {
