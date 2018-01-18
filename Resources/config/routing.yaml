@@ -6,21 +6,19 @@ user_registration_success:
 user_registration_confirm:
     path: /registration/confirm/{token}
     requirements:
-        token: \d+
+        token: \w+
     defaults:
         _controller: \Mindy\Bundle\UserBundle\Controller\RegistrationController::confirm
 
 user_set_password:
     path: /set_password/{token}
     requirements:
-        token: \d+
+        token: \w+
     defaults:
         _controller: \Mindy\Bundle\UserBundle\Controller\PasswordController::set
 
 user_change_password:
     path: /change_password
-    requirements:
-        token: \d+
     defaults:
         _controller: \Mindy\Bundle\UserBundle\Controller\PasswordController::change
 
@@ -54,4 +52,4 @@ user_lost_password_confirm:
     defaults:
         _controller: \Mindy\Bundle\UserBundle\Controller\LostPasswordController::confirm
     requirements:
-        token: \d+
+        token: \w+
